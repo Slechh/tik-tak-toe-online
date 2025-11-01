@@ -16,9 +16,10 @@ module.exports = {
       gridTemplateRows: {
         "game-field": "repeat(3, 30px)",
       },
-      fontFamily: {
-        sans: ["Arial", "Helvetica", "sans-serif"],
-      },
+      lineHeight:
+      {
+        tight: "1.2"
+      }
     },
   },
   plugins: [],
