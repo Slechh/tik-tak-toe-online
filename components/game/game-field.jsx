@@ -1,11 +1,73 @@
 import clsx from "clsx";
-import { ZeroIcon } from "./icons/zero-icon";
-import { CrossIcon } from "./icons/cross-icon";
 import { UiButton } from "../uikit/ui-button";
-
-const cells = new Array(19 * 19).fill(null);
+import { GameSymbol } from "./game-symbol";
+import { useGameState } from "./use-game-state";
 
 export function GameField({ className }) {
+  const { cells, currentMove, handleCellClick, nextMove } = useGameState();
+
+  const actions = (
+    <>
+      <UiButton variant="primary" size="md">
+        Ничья
+      </UiButton>
+      <UiButton variant="outline" size="md">
+        Сдаться
+      </UiButton>
+    </>
+  );
+  return (
+    <GameFieldLayout className={className}>
+      <GameMoveInfo
+        actions={actions}
+        currentMove={currentMove}
+        nextMove={nextMove}
+      />
+      <GameGrid>
+        {cells.map((symbol, index) => (
+          <GameCell onClick={() => handleCellClick(index)} key={index}>
+            {symbol && <GameSymbol symbol={symbol} className="w-5 h-5" />}
+          </GameCell>
+        ))}
+      </GameGrid>
+    </GameFieldLayout>
+    // <div
+    //   className={clsx(
+    //     className,
+    //     "pt-5 pb-7 px-8 bg-white rounded-2xl shadow-md",
+    //   )}
+    // >
+    //   <div className="flex gap-3 items-center">
+    //     <div className="mr-auto">
+    //       <div className="flex gap-1 items-center font-semibold text-xl leading-tight">
+    //         Ход: <ZeroIcon className="w-5 h-5" />
+    //       </div>
+    //       <div className="flex gap-1 items-center text-slate-400 text-xs leading-tight">
+    //         Следующий: <CrossIcon />
+    //       </div>
+    //     </div>
+
+    //     <UiButton variant="primary" size="md">
+    //       Ничья
+    //     </UiButton>
+    //     <UiButton variant="outline" size="md">
+    //       Сдаться
+    //     </UiButton>
+    //   </div>
+
+    //   <div className="grid grid-cols-[repeat(19,_30px)] grid-rows-[repeat(19,_30px)] pl-px pt-px mt-4">
+    //     {cells.map((_, i) => (
+    //       <button
+    //         key={i}
+    //         className="border border-slate-200 -ml-px -mt-px flex items-center justify-center"
+    //       ></button>
+    //     ))}
+    //   </div>
+    // </div>
+  );
+}
+
+function GameFieldLayout({ children, className }) {
   return (
     <div
       className={clsx(
@@ -13,34 +75,42 @@ export function GameField({ className }) {
         "pt-5 pb-7 px-8 bg-white rounded-2xl shadow-md",
       )}
     >
-      <div className="flex gap-3 items-center">
-        <div className="mr-auto">
-          <div className="flex gap-1 items-center font-semibold text-xl leading-tight">
-            Ход: <ZeroIcon className="w-5 h-5" />
-          </div>
-          <div className="flex gap-1 items-center text-slate-400 text-xs leading-tight">
-            Следующий: <CrossIcon />
-          </div>
+      {children}
+    </div>
+  );
+}
+
+function GameCell({ children, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className="border border-slate-200 -ml-px -mt-px flex items-center justify-center"
+    >
+      {children}
+    </button>
+  );
+}
+
+function GameMoveInfo({ actions, currentMove, nextMove }) {
+  return (
+    <div className="flex gap-3 items-center">
+      <div className="mr-auto">
+        <div className="flex gap-1 items-center font-semibold text-xl leading-tight">
+          Ход: <GameSymbol symbol={currentMove} className="w-5 h-5" />
         </div>
-
-        <UiButton variant="primary" size="md">
-          Ничья
-        </UiButton>
-        <UiButton variant="outline" size="md">
-          Сдаться
-        </UiButton>
+        <div className="flex gap-1 items-center text-slate-400 text-xs leading-tight">
+          Следующий: <GameSymbol symbol={nextMove} className="w-3 h-3" />
+        </div>
       </div>
+      {actions}
+    </div>
+  );
+}
 
-      <div className="grid grid-cols-[repeat(19,_30px)] grid-rows-[repeat(19,_30px)] pl-px pt-px mt-4">
-        {cells.map((_, i) => (
-          <button
-            key={i}
-            className="border border-slate-200 -ml-px -mt-px flex items-center justify-center"
-          >
-            <ZeroIcon className="w-5 h-5"/>
-          </button>
-        ))}
-      </div>
+function GameGrid({ children }) {
+  return (
+    <div className="grid grid-cols-[repeat(19,_30px)] grid-rows-[repeat(19,_30px)] pl-px pt-px mt-4">
+      {children}
     </div>
   );
 }
