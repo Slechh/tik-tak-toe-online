@@ -13,7 +13,7 @@ export function Header() {
         Играть
       </UiButton>
       <button className="ml-auto flex items-center gap-2 text-teal-600 text-start">
-        <Profile />
+        <Profile name="Dima" rating="5000"/>
         <ArrowDownIcon />
       </button>
     </header>
