@@ -39,7 +39,13 @@ const players = [
   },
 ];
 
-export function GameInfo({ className, playersCount, currentMove }) {
+export function GameInfo({
+  className,
+  playersCount,
+  currentMove,
+  isWinner,
+  onPlayerTimeOver,
+}) {
   return (
     <div
       className={clsx(
@@ -52,15 +58,16 @@ export function GameInfo({ className, playersCount, currentMove }) {
           key={player.id}
           playerInfo={player}
           isRight={index % 2 === 1}
-          isTimerRunning={player.symbol === currentMove}
+          onTimeOver={() => onPlayerTimeOver(player.symbol)}
+          isTimerRunning={player.symbol === currentMove && !isWinner}
         />
       ))}
     </div>
   );
 }
 
-function PlayerInfo({ playerInfo, isRight, isTimerRunning }) {
-  const [seconds, setSeconds] = useState(60);
+function PlayerInfo({ playerInfo, isRight, isTimerRunning, onTimeOver }) {
+  const [seconds, setSeconds] = useState(10);
   const minutesString = String(Math.floor(seconds / 60)).padStart(2, "0");
   const secondsString = String(seconds % 60).padStart(2, "0");
   const isDanger = seconds < 10;
@@ -73,10 +80,16 @@ function PlayerInfo({ playerInfo, isRight, isTimerRunning }) {
 
       return () => {
         clearInterval(interval);
-        setSeconds(60);
+        setSeconds(6);
       };
     }
   }, [isTimerRunning]);
+
+  useEffect(() => {
+    if (seconds === 0) {
+      onTimeOver();
+    }
+  }, [seconds]);
 
   const getTimerColor = () => {
     if (isTimerRunning) {
@@ -100,7 +113,11 @@ function PlayerInfo({ playerInfo, isRight, isTimerRunning }) {
       </div>
       <div className={clsx("w-px h-6 bg-slate-200", isRight && "order-2")} />
       <div
-        className={clsx("text-lg font-semibold w-[60px]", isRight && "order-1",getTimerColor())}
+        className={clsx(
+          "text-lg font-semibold w-[60px]",
+          isRight && "order-1",
+          getTimerColor(),
+        )}
       >
         {minutesString}:{secondsString}
       </div>
