@@ -20,7 +20,7 @@ export const MOVE_ORDER = [
 export const PLAYERS = [
   {
     id: 1,
-    name: "Dima",
+    name: "Dima Dima Dima Dima DimaDima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dimav Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima Dima",
     rating: "1230",
     avatar: avatarSrc1,
     symbol: GAME_SYMBOLS.CROSS,
@@ -35,7 +35,7 @@ export const PLAYERS = [
   {
     id: 3,
     name: "Vasya",
-    rating: "1444",
+    rating: "1111",
     avatar: avatarSrc3,
     symbol: GAME_SYMBOLS.TRIANGLE,
   },
