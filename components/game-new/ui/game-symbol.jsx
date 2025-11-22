@@ -12,6 +12,5 @@ export function GameSymbol({ symbol, className }) {
       [GAME_SYMBOLS.TRIANGLE]: TriangleIcon,
       [GAME_SYMBOLS.SQUARE]: SquareIcon,
     }[symbol] ?? CrossIcon;
-  console.log(Icon);
   return <Icon className={className} />;
 }
