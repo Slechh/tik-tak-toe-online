@@ -15,18 +15,28 @@ import { gameStateReducer } from "./model/game-state-reducer";
 import { getNextMove } from "./model/get-next-move";
 import { computeWinner } from "./model/compute-winner";
 import { computeWinnerSymbol } from "./model/compute-winner-symbol";
+import { computerPlayerTimer } from "./model/compute-player-timer";
 
 import { PLAYERS } from "./constants";
 
-const PLAYERS_COUNT = 4;
+import { useInterval } from "../lib/timers";
+
+const PLAYERS_COUNT = 2;
 
 export function Game() {
-  const [gameState, dispatch] = useReducer(
-    gameStateReducer,
-    { playersCount: PLAYERS_COUNT },
-    initGameState,
+  const [gameState, dispatch] = useReducer(gameStateReducer, undefined, () =>
+    initGameState({
+      playersCount: PLAYERS_COUNT,
+      defaultTimer: 10000,
+      currentMoveStart: Date.now(), // Когда начался ход первого игрока(запускается один раз в самом начале)
+    }),
   );
-  
+
+  // Вызывается при каждом ререндере Game, но поскольку у нас внутри самой функции есть useEffect который запускает setInterval для нашего игрока, который будет работать до того момента пока у нас не изменится gameState.currentMoveStart(то есть не поменяется игрок)
+  useInterval(1000, gameState.currentMoveStart, () => { 
+    dispatch({ type: GAME_STATE_ACTIONS.TICK , now: Date.now()});
+  });
+
   const winnerSequence = computeWinner(gameState);
   const nextMove = getNextMove(gameState);
   const winnerSymbol = computeWinnerSymbol(gameState, {
@@ -46,17 +56,26 @@ export function Game() {
         gameInfo={
           <GameInfo isRatingGame playersCount={4} timeMode={"1 мин. на ход"} />
         }
-        playersList={PLAYERS.slice(0, PLAYERS_COUNT).map((player, index) => (
-          <PlayerInfo
-            key={player.id}
-            avatar={player.avatar}
-            name={player.name}
-            rating={player.rating}
-            symbol={player.symbol}
-            isRight={index % 2 === 1}
-            seconds={60}
-          />
-        ))}
+        playersList={PLAYERS.slice(0, PLAYERS_COUNT).map((player, index) => {
+          // timer - просто колво секунд текущего игрока
+          // timerStartAt - это то время когда текущий игрок начала ходить 
+          const { timer , timerStartAt } = computerPlayerTimer(
+            gameState,
+            player.symbol,
+          );
+          return (
+            <PlayerInfo
+              key={player.id}
+              avatar={player.avatar}
+              name={player.name}
+              rating={player.rating}
+              symbol={player.symbol}
+              isRight={index % 2 === 1}
+              timer={timer}
+              timerStartAt={timerStartAt}
+            />
+          );
+        })}
         gameMoveInfo={
           <GameMoveInfo nextMove={nextMove} currentMove={currentMove} />
         }
@@ -64,7 +83,11 @@ export function Game() {
           <GameCell
             disabled={!!winnerSymbol}
             onClick={() => {
-              dispatch({ type: GAME_STATE_ACTIONS.CELL_CLICK, index });
+              dispatch({
+                type: GAME_STATE_ACTIONS.CELL_CLICK,
+                index,
+                now: Date.now(),
+              });
             }}
             key={index}
             isWinner={winnerSequence?.includes(index)}
@@ -81,7 +104,7 @@ export function Game() {
             rating={player.rating}
             symbol={player.symbol}
             isRight={index % 2 === 1}
-            seconds={60}
+            timer={gameState.timers[player.symbol]}
           />
         ))}
         winnerName={winnerPlayer?.name}
